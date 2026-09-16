@@ -1,0 +1,88 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  lint:
+    name: Lint (ruff)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+          cache: pip
+      - run: pip install -e ".[dev]"
+      - name: ruff check
+        run: ruff check src tests
+
+  test:
+    name: Test (py${{ matrix.python }} / ${{ matrix.os }})
+    # Tests are hermetic: mock browser driver, in-process mock model servers,
+    # temp data dirs. No network or API keys needed here.
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        python: ["3.11", "3.12", "3.13"]
+    env:
+      JQC_BROWSER_DRIVER: mock
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+          cache: pip
+      - name: Install
+        run: pip install -e ".[dev]"
+      - name: Run tests
+        run: pytest
+
+  package:
+    name: Build & import check (py${{ matrix.python }})
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python: ["3.11", "3.12", "3.13"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+          cache: pip
+      - run: pip install -e ".[dev]"
+      - name: compileall
+        run: python -m compileall -q src
+      - name: Import smoke
+        run: python -c "import jqc.app, jqc.api.server, jqc.cli"
+      - name: Build sdist + wheel
+        run: pip install build && python -m build
+
+  smoke:
+    name: Smoke (real Playwright)
+    # Verifies the real browser driver end-to-end on CI. Runs on the default
+    # branch only to save runner time (created for the acceptance gate).
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+          cache: pip
+      - run: pip install -e ".[dev]"
+      - run: python -m playwright install --with-deps chromium
+      - name: Smoke test
+        env:
+          JQC_BROWSER_DRIVER: playwright
+        run: python scripts/smoke.py
+        timeout-minutes: 10

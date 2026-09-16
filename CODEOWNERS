@@ -1,0 +1,9 @@
+# Default owners for the whole repo (fallback).
+* @honeyamn10
+
+# Security-sensitive areas require the same maintainer review.
+src/jqc/security/ @honeyamn10
+SECURITY.md @honeyamn10
+
+# CI is a shared contract; keep it out of casual one-off edits.
+.github/ @honeyamn10

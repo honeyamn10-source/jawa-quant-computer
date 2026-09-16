@@ -1,0 +1,77 @@
+name: Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      bump:
+        description: "Version bump and tag"
+        required: true
+        default: "patch"
+        type: choice
+        options: [patch, minor, major]
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: read
+
+jobs:
+  version:
+    name: Bump version
+    if: github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - name: Bump version in pyproject.toml and tag
+        run: |
+          python - <<'EOF'
+          import re
+          from pathlib import Path
+          bump = "${{ github.event.inputs.bump }}"
+          p = Path("pyproject.toml")
+          text = p.read_text()
+          cur = re.search(r'^version = "([^"]+)"$', text, re.M).group(1)
+          major, minor, patch = map(int, cur.split("."))
+          if bump == "major":
+              major, minor, patch = major + 1, 0, 0
+          elif bump == "minor":
+              minor, patch = minor + 1, 0
+          else:
+              patch += 1
+          new = f"{major}.{minor}.{patch}"
+          p.write_text(re.sub(r'^version = "[^"]+"$', f'version = "{new}"', text, count=1, flags=re.M))
+          print(f"current={cur} new={new}")
+          Path("VERSION").write_text(new + "\n")
+          EOF
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          NEW=$(cat VERSION)
+          git add pyproject.toml VERSION
+          git commit -m "chore: release v$NEW"
+          git tag -a "v$NEW" -m "Jawa Quant Computer v$NEW"
+          git push origin HEAD "v$NEW"
+
+  publish:
+    name: Publish to PyPI
+    # Runs on tag pushes (including ones just created by the version job).
+    if: startsWith(github.ref, 'refs/tags/v')
+    runs-on: ubuntu-latest
+    environment: pypi
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install build
+      - run: python -m build
+      - uses: pypa/gh-action-pypi-publish@v1.11.0
