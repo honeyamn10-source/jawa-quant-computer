@@ -1,0 +1,54 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+*.egg
+*.so
+*.pyd
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Secrets / local state
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+secrets.vault
+*.db
+*.db-journal
+*.db-wal
+*.db-shm
+
+# Node / desktop shell (future)
+node_modules/
+dist/
+target/
+apps/desktop/target
+src-tauri/target
+
+# Test / tooling artifacts
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+coverage.xml
+.mypy_cache/
+
+# Playwright browser downloads
+/ms-playwright/
+
+# OS cruft
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs and runs
+*.log
+runs/
+jqc-data/
