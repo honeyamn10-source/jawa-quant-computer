@@ -1,3 +1,8 @@
+<p align="center">
+  <img src="docs/assets/logo.svg" alt="Jawa Quant Computer logo" width="100%" />
+</p>
+
+
 # Jawa Quant Computer
 
 An autonomous AI computer: a local agent operating layer that browses the web,
