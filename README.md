@@ -8,6 +8,16 @@ and can call your favourite LLM — all from a terminal REPL or a loopback web U
 > runs locally on your machine; nothing leaves it unless you configure a model
 > provider and approve the specific action.
 
+<div align="center">
+
+| CI · lint | Tests | Python | License |
+| --- | --- | --- | --- |
+| [![CI](https://github.com/honeyamn10-source/jawa-quant-computer/actions/workflows/ci.yml/badge.svg)](https://github.com/honeyamn10-source/jawa-quant-computer/actions/workflows/ci.yml) | ![tests: 55 passing](https://img.shields.io/badge/tests-55%20passing-2ea44f) | ![python 3.11–3.13](https://img.shields.io/badge/python-3.11%20%7C%203.12%20%7C%203.13-3776ab) | [![MIT](https://img.shields.io/badge/license-MIT-4db5bd)](LICENSE) |
+
+**Demo-first · loopback-only · permission-gated every action**
+
+</div>
+
 ## Highlights
 
 - **In-process agent orchestrator** — planner (heuristic for demo mode, LLM/JSON for real
