@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Jawa Quant Computer</title>
+  <link rel="stylesheet" href="/ui/style.css" />
+</head>
+<body>
+  <div id="app">
+    <aside class="sidebar">
+      <div class="brand">
+        <span class="brand-dot"></span>
+        <span class="brand-name">Jawa Quant Computer</span>
+      </div>
+      <nav>
+        <button class="nav-item active" data-view="chat">Chat</button>
+        <button class="nav-item" data-view="tasks">Tasks</button>
+        <button class="nav-item" data-view="computer">Computer</button>
+        <button class="nav-item" data-view="files">Files</button>
+        <button class="nav-item" data-view="models">AI Models</button>
+        <button class="nav-item" data-view="skills">Skills</button>
+        <button class="nav-item" data-view="memory">Memory</button>
+        <button class="nav-item" data-view="activity">Activity</button>
+        <button class="nav-item" data-view="settings">Settings</button>
+      </nav>
+      <div class="sidebar-foot">
+        <span id="privacy-badge" class="badge">hybrid</span>
+        <span id="provider-badge" class="badge dim">—</span>
+      </div>
+    </aside>
+
+    <main class="content">
+      <section id="view-chat" class="view active">
+        <div class="chat-header">
+          <h1>What would you like me to do?</h1>
+        </div>
+        <div id="messages" class="messages"><div class="empty-state">
+          <p>Ask anything. The agent plans, executes, verifies and reports —
+          browser, files, shell, scheduler, and local/cloud AI.</p>
+        </div></div>
+        <div class="chat-input">
+          <textarea id="chat-text" rows="1" placeholder="Ask anything… (Enter to send, Shift+Enter for newline)"></textarea>
+          <button id="send-btn" class="primary">Send</button>
+        </div>
+      </section>
+
+      <section id="view-tasks" class="view">
+        <h1>Tasks</h1>
+        <div id="task-list" class="card-list"></div>
+      </section>
+
+      <section id="view-computer" class="view">
+        <h1>Computer</h1>
+        <div id="computer-head" class="computer-head"></div>
+        <div class="grid-2">
+          <div class="card"><h3>Active run</h3><div id="active-run" class="mono muted">No task running.</div></div>
+          <div class="card"><h3>Recent steps</h3><div id="recent-steps" class="mono muted">No steps yet.</div></div>
+        </div>
+        <div class="card"><h3>Controls</h3>
+          <div class="btn-row">
+            <button id="stop-all" class="danger">Stop all</button>
+            <button id="browser-check" class="ghost">Check browser</button>
+          </div>
+          <div id="browser-status" class="muted"></div>
+        </div>
+      </section>
+
+      <section id="view-files" class="view">
+        <h1>Files</h1>
+        <p class="muted" id="files-path">—</p>
+        <div id="file-list" class="card-list"></div>
+      </section>
+
+      <section id="view-models" class="view">
+        <h1>AI Models</h1>
+        <div id="provider-list" class="card-list"></div>
+        <div class="card">
+          <h3>Add a provider</h3>
+          <div class="form-grid">
+            <label>Kind <select id="p-kind">
+              <option value="openai-compatible">OpenAI-compatible</option>
+              <option value="ollama">Ollama (local)</option>
+              <option value="mock">Mock (demo)</option>
+            </select></label>
+            <label>Name <input id="p-name" placeholder="My provider" /></label>
+            <label>Base URL <input id="p-url" placeholder="http://127.0.0.1:11434" /></label>
+            <label>Model <input id="p-model" placeholder="gpt-4o-mini / llama3.1:8b" /></label>
+            <label>API Key <input id="p-key" type="password" placeholder="sk-… (stored in OS keychain/vault)" /></label>
+          </div>
+          <div class="btn-row">
+            <button id="add-provider" class="primary">Add + Test</button>
+          </div>
+          <div id="provider-result" class="muted"></div>
+        </div>
+      </section>
+
+      <section id="view-skills" class="view">
+        <h1>Skills</h1>
+        <div id="skill-list" class="card-list"></div>
+      </section>
+
+      <section id="view-memory" class="view">
+        <h1>Memory</h1>
+        <div class="card">
+          <div class="form-grid">
+            <label>Content <input id="mem-content" placeholder="Remember that…" /></label>
+            <label>Kind <select id="mem-kind">
+              <option>preference</option><option>workspace</option><option>semantic</option>
+            </select></label>
+          </div>
+          <button id="mem-save" class="primary">Save memory</button>
+        </div>
+        <div id="memory-list" class="card-list"></div>
+      </section>
+
+      <section id="view-activity" class="view">
+        <h1>Activity</h1>
+        <div id="activity-list" class="card-list"></div>
+      </section>
+
+      <section id="view-settings" class="view">
+        <h1>Settings</h1>
+        <div class="card">
+          <h3>Privacy mode</h3>
+          <p class="muted">Local: no cloud. Hybrid: sensitive routing local first. Cloud: routers may use configured providers.</p>
+          <div class="btn-row">
+            <button class="ghost" data-privacy="local">Local only</button>
+            <button class="ghost" data-privacy="hybrid">Private hybrid</button>
+            <button class="ghost" data-privacy="cloud">Cloud enabled</button>
+          </div>
+        </div>
+        <div id="settings-status"></div>
+      </section>
+    </main>
+  </div>
+  <div id="toast" class="toast"></div>
+  <script src="/ui/app.js"></script>
+</body>
+</html>
