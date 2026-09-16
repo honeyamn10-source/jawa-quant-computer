@@ -1,5 +1,9 @@
 <p align="center">
-  <img src="docs/assets/logo.svg" alt="Jawa Quant Computer logo" width="100%" />
+  <img src="docs/assets/logo.svg" alt="jawa-quant-computer logo" width="100%" />
+</p>
+
+
+<p align="center">
 </p>
 
 
