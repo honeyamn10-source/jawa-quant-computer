@@ -1,0 +1,413 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Jawa Quant Computer — a local autonomous AI computer under your approval</title>
+  <meta name="description" content="Jawa Quant Computer is a local agent operating layer: it browses the web, manages files, runs commands, uses your documents and memory, schedules jobs and calls your favourite LLM — from a terminal REPL or a loopback web UI.">
+  <meta name="keywords" content="AI agent, autonomous computer, local, loopback, browser, filesystem, shell, scheduling, ollama, openai, python, jawa">
+  <meta name="author" content="Bittu Sharma">
+  <link rel="canonical" href="https://honeyamn10-source.github.io/jawa-quant-computer/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Jawa Quant Computer">
+  <meta property="og:title" content="Jawa Quant Computer — a local autonomous AI computer under your approval">
+  <meta property="og:description" content="A local agent operating layer: browser, files, shell, memory and scheduling skills, permission-gated, running entirely on your machine.">
+  <meta property="og:url" content="https://honeyamn10-source.github.io/jawa-quant-computer/">
+  <meta property="og:image" content="https://honeyamn10-source.github.io/jawa-quant-computer/og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Jawa Quant Computer — a local autonomous AI computer under your approval">
+  <meta name="twitter:description" content="A local agent operating layer: browser, files, shell, memory and scheduling skills, permission-gated, running entirely on your machine.">
+  <meta name="twitter:image" content="https://honeyamn10-source.github.io/jawa-quant-computer/og.png">
+  <meta name="twitter:creator" content="@honeyamn10-source">
+  <meta name="color-scheme" content="dark light">
+  <meta name="theme-color" content="#0b0d17">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="stylesheet" href="assets/site.css">
+  <link rel="sitemap" type="application/xml" href="sitemap.xml">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Jawa Quant Computer",
+    "applicationCategory": "DeveloperApplication",
+    "operatingSystem": "OS Independent (Python 3.11+)",
+    "description": "Local autonomous AI computer: browser, filesystem, shell, documents, memory, search and scheduling skills, permission-gated, loopback-only.",
+    "author": { "@type": "Person", "name": "Bittu Sharma" },
+    "url": "https://honeyamn10-source.github.io/jawa-quant-computer/",
+    "license": "https://github.com/honeyamn10-source/jawa-quant-computer/blob/main/LICENSE",
+    "codeRepository": "https://github.com/honeyamn10-source/jawa-quant-computer"
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="nav">
+    <div class="wrap nav-inner">
+      <a class="brand" href="#top" aria-label="Jawa Quant Computer home">
+        <svg viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="14" fill="#818cf8"/><text x="32" y="45" font-family="ui-monospace,Consolas,monospace" font-size="34" font-weight="700" fill="#0b0d17" text-anchor="middle">j</text></svg>
+        jawa-quant-computer
+      </a>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="#features">Skills</a>
+        <a href="#how">How it works</a>
+        <a href="#architecture">Architecture</a>
+        <a href="#safety">Safety</a>
+        <a href="#install">Install</a>
+        <a href="#docs">Docs</a>
+        <a href="https://github.com/honeyamn10-source/jawa-quant-computer" target="_blank" rel="noopener">GitHub</a>
+      </nav>
+      <button class="theme-toggle" type="button" aria-label="Switch theme">☀️</button>
+      <button class="nav-burger" type="button" aria-expanded="false" aria-label="Toggle navigation">☰</button>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- ============ HERO ============ -->
+    <section class="hero" id="top">
+      <div class="wrap">
+        <div class="hero-grid">
+          <div class="hero-inner">
+            <span class="status"><span class="dot" aria-hidden="true"></span> v0.1.0 (alpha) · Python 3.11–3.13 · MIT</span>
+            <h1>An autonomous AI computer that lives on your machine.</h1>
+            <p class="lede">Jawa Quant Computer is a local agent operating layer. It browses the web, manages files, runs commands, consults your documents and memory, schedules jobs and calls your favourite LLM — driven from a terminal REPL or a loopback web UI.</p>
+            <div class="btn-row">
+              <a class="btn btn-primary" href="#install">Install locally</a>
+              <a class="btn btn-ghost" href="https://github.com/honeyamn10-source/jawa-quant-computer" target="_blank" rel="noopener">View on GitHub</a>
+            </div>
+          </div>
+          <div class="term" role="img" aria-label="Terminal capture of the jawa-quant-computer REPL, asking it to research and schedule a recurring job">
+            <div class="term-bar"><i class="t1"></i><i class="t2"></i><i class="t3"></i><span>jawa-quant-computer</span></div>
+            <div class="term-body">$ <span class="c1">jawa-quant-computer</span>
+ Local AI agent — type a request, or /help for commands.
+
+<span class="dim">&gt;</span> research "latest python releases" and save a summary
+<span class="warn">permission</span> research.search — request 7f4a…
+ <span class="c3">[auto-approved in demo mode — low risk]</span>
+<span class="ok">✅</span> research.search
+<span class="ok">✅</span> filesystem.write → notes/python-releases.md
+<span class="ok">✓ task 9f2c complete — Summary saved to workspace
+    notes/python-releases.md</span>
+
+<span class="dim">&gt;</span> schedule every day at 09:00 — fetch weather for Bangalore
+<span class="warn">permission</span> scheduler.interval — request 8c1b…
+ <span class="c1">/approve 8c1b</span>
+<span class="ok">approved 8c1b — job scheduled (next: today 09:00)</span>
+
+<span class="dim">&gt;</span> /quit</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ METRICS ============ -->
+    <section class="section section-soft">
+      <div class="wrap">
+        <div class="metrics" data-reveal>
+          <div class="metric"><b>11</b><span>built-in skills</span></div>
+          <div class="metric"><b>3</b><span>model providers incl. a fully offline mock</span></div>
+          <div class="metric"><b>127.0.0.1</b><span>loopback-only by default</span></div>
+          <div class="metric"><b>50</b><span>steps / 30 min guardrails per task</span></div>
+          <div class="metric"><b>55</b><span>tests passing</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ SKILLS ============ -->
+    <section class="section" id="features">
+      <div class="wrap">
+        <span class="eyebrow">Skills</span>
+        <h2>Ten skill modules, one orchestrator, every action permission-gated</h2>
+        <p class="lede">Each skill corresponds to a module in <code>src/jqc/skills/</code> — no generated filler, all exercised by the test suite.</p>
+        <div class="grid grid-3" style="margin-top:34px">
+          <article class="card" data-reveal>
+            <span class="ico" aria-hidden="true">🌐</span>
+            <h3><code>browser</code></h3>
+            <p>Drive a real browser with Playwright, or switch to the deterministic mock driver for offline, fast, repeatable runs.</p>
+          </article>
+          <article class="card" data-reveal>
+            <span class="ico" aria-hidden="true">📁</span>
+            <h3><code>filesystem</code></h3>
+            <p>Read, write, list and organise files inside the sandboxed workspace directory.</p>
+          </article>
+          <article class="card" data-reveal>
+            <span class="ico" aria-hidden="true">⌂</span>
+            <h3><code>shell</code></h3>
+            <p>Run commands in a workspace-scoped shell with explicit approval for each invocation.</p>
+          </article>
+          <article class="card" data-reveal>
+            <span class="ico" aria-hidden="true">⎇</span>
+            <h3><code>git</code></h3>
+            <p>Stage, commit and inspect repositories from within a task flow.</p>
+          </article>
+          <article class="card" data-reveal>
+            <span class="ico" aria-hidden="true">📄</span>
+            <h3><code>documents</code></h3>
+            <p>Read and extract content from your own document library.</p>
+          </article>
+          <article class="card" data-reveal>
+            <span class="ico" aria-hidden="true">🧠</span>
+            <h3><code>memory</code></h3>
+            <p>Store and retrieve facts across sessions so the agent builds lasting context.</p>
+          </article>
+          <article class="card" data-reveal>
+            <span class="ico" aria-hidden="true">🔎</span>
+            <h3><code>search</code></h3>
+            <p>Query web search and return ranked, citable results into the task stream.</p>
+          </article>
+          <article class="card" data-reveal>
+            <span class="ico" aria-hidden="true">🎓</span>
+            <h3><code>research</code></h3>
+            <p>Orchestrate search + document reading into a written research deliverable.</p>
+          </article>
+          <article class="card" data-reveal>
+            <span class="ico" aria-hidden="true">🖥️</span>
+            <h3><code>computer</code></h3>
+            <p>Desktop-style actions for systems that need GUI-level interaction.</p>
+          </article>
+          <article class="card" data-reveal>
+            <span class="ico" aria-hidden="true">⏰</span>
+            <h3><code>scheduler</code></h3>
+            <p>One-time, interval and cron scheduling with timezone awareness — jobs persist to SQLite and fire on time.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ HOW IT WORKS ============ -->
+    <section class="section section-soft" id="how">
+      <div class="wrap">
+        <span class="eyebrow">How it works</span>
+        <h2>From a sentence to approved, scheduled actions</h2>
+        <div class="grid" style="grid-template-columns:1fr 1fr; gap:48px; align-items:start">
+          <ol class="steps" style="list-style:none;margin:0;padding:0">
+            <li class="step">
+              <span class="n" aria-hidden="true"></span>
+              <div><h3>Your request, a task</h3><p>Type in the REPL or POST to the loopback API — the orchestrator creates a task with runtime and step guardrails.</p></div>
+            </li>
+            <li class="step">
+              <span class="n" aria-hidden="true"></span>
+              <div><h3>Plan</h3><p>A heuristic planner builds a DAG in demo mode; with a real model, plans are produced and verified as structured JSON.</p></div>
+            </li>
+            <li class="step">
+              <span class="n" aria-hidden="true"></span>
+              <div><h3>Execute step by step</h3><p>The DAG executor runs steps through skills. Each tool call is classified by risk before it acts.</p></div>
+            </li>
+            <li class="step">
+              <span class="n" aria-hidden="true"></span>
+              <div><h3>Permission gate</h3><p>Low/medium risk auto-resolve in demo mode; sensitive actions queue for an explicit <code>/approve</code> or web approval.</p></div>
+            </li>
+            <li class="step">
+              <span class="n" aria-hidden="true"></span>
+              <div><h3>Verify and retry</h3><p>A goal verifier checks the outcome; failing steps retry within the guardrail budget before the task is finalised.</p></div>
+            </li>
+            <li class="step">
+              <span class="n" aria-hidden="true"></span>
+              <div><h3>Persist and schedule</h3><p>Tasks, steps and jobs are stored in a SQLite WAL database; recurring jobs enqueue new tasks through the same pipeline.</p></div>
+            </li>
+          </ol>
+          <div class="stack">
+            <div class="note"><strong>Everything is local by default.</strong> The service binds to <code>127.0.0.1</code> and the shell/filesystem/browser skills are workspace-scoped. Nothing leaves your machine unless you configure a model provider and approve the specific action.</div>
+            <div class="term" role="img" aria-label="The permission approval flow in the web UI">
+              <div class="term-bar"><i class="t1"></i><i class="t2"></i><i class="t3"></i><span>approval request</span></div>
+              <div class="term-body"><span class="warn">permission</span> shell.run — request 9d7e…
+   command: pip install requests
+   risk: <span class="c2">medium</span>
+ <span class="c1">/approve 9d7e</span>  or deny → task continues with the tool skipped
+ <span class="ok">approved 9d7e — 1 step queued</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ ARCHITECTURE ============ -->
+    <section class="section" id="architecture">
+      <div class="wrap">
+        <span class="eyebrow">Architecture</span>
+        <h2>Clear module boundaries inside the <code>jqc</code> package</h2>
+        <div class="pipe" style="margin-top:26px; padding:24px; border:1px solid var(--border); border-radius:var(--radius); background:var(--bg-raised)">
+          <span class="node"><b>cli</b> REPL entry</span><span class="arr">→</span>
+          <span class="node"><b>api</b> loopback FastAPI</span><span class="arr">→</span>
+          <span class="node"><b>orchestrator</b> planner · executor · verifier</span><span class="arr">→</span>
+          <span class="node"><b>skills</b> 11 tools</span>
+          <span class="arr" aria-hidden="true">|</span>
+          <span class="node"><b>models</b> provider router</span><span class="arr">→</span>
+          <span class="node"><b>security</b> permissions · approvals · vault</span><span class="arr">→</span>
+          <span class="node"><b>storage</b> SQLite (WAL)</span><span class="arr">→</span>
+          <span class="node"><b>scheduler</b> cron jobs</span>
+        </div>
+        <div class="ftable" style="margin-top:30px">
+          <table class="ftable">
+            <thead><tr><th>Module</th><th>Responsibility</th></tr></thead>
+            <tbody>
+              <tr><td><code>config.py</code></td><td>Pydantic settings, <code>JQC_</code> env prefix; port 8337, data dir <code>~/.jawa-quant-computer</code>, runtime guardrails.</td></tr>
+              <tr><td><code>cli.py</code></td><td>Terminal REPL with <code>/approve</code>, <code>/deny</code>, <code>/providers</code>, <code>/jobs</code>, <code>/skills</code>, <code>/tasks</code>, <code>/workspace</code>.</td></tr>
+              <tr><td><code>api/</code></td><td>Loopback FastAPI: SSE task streams and approval endpoints for the web UI in <code>ui/</code>.</td></tr>
+              <tr><td><code>orchestrator/</code></td><td>Planner (heuristic or LLM/JSON), DAG step executor, goal verifier, step retries and guardrail enforcement.</td></tr>
+              <tr><td><code>skills/</code></td><td>Browser, filesystem, shell, git, documents, memory, search, research, computer and scheduler tools.</td></tr>
+              <tr><td><code>models/</code></td><td>Provider abstraction (<code>ModelProvider</code>) with OpenAI-compatible, native Ollama and a deterministic offline mock.</td></tr>
+              <tr><td><code>security/</code></td><td>Risk-based permission manager, approval service, encrypted secret vault (Fernet + OS keyring), redaction.</td></tr>
+              <tr><td><code>storage/</code></td><td>SQLite repositories with WAL journaling for tasks, steps, jobs, plans and memory.</td></tr>
+              <tr><td><code>scheduler/</code></td><td>Once / interval / cron schedule math, timezone aware, persisted jobs that enqueue new tasks.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ SAFETY ============ -->
+    <section class="section section-soft" id="safety">
+      <div class="wrap">
+        <span class="eyebrow">Safety model</span>
+        <h2>An autonomous computer still asks before it acts</h2>
+        <div class="grid grid-2" style="margin-top:30px">
+          <article class="card" data-reveal>
+            <span class="ico" aria-hidden="true">🗝️</span>
+            <h3>Loopback-only network</h3>
+            <p>The API binds to <code>127.0.0.1</code>. Remote control it only if you explicitly expose it.</p>
+          </article>
+          <article class="card" data-reveal>
+            <span class="ico" aria-hidden="true">📋</span>
+            <h3>Risk-classified approvals</h3>
+            <p>Every tool call is assigned a risk class. Sensitive actions are blocked until an explicit approval, in the REPL or the web UI.</p>
+          </article>
+          <article class="card" data-reveal>
+            <span class="ico" aria-hidden="true">⏱️</span>
+            <h3>Hard guardrails</h3>
+            <p>Max 50 steps and 30 minutes per task, max 4 concurrent tasks, workspace-scoped file and shell access.</p>
+          </article>
+          <article class="card" data-reveal>
+            <span class="ico" aria-hidden="true">🔐</span>
+            <h3>Encrypted secret vault</h3>
+            <p>API keys live in a Fernet-encrypted vault backed by the OS keyring, with a secure file fallback. Secrets are never required in a plaintext <code>.env</code>.</p>
+          </article>
+        </div>
+        <div class="note" style="margin-top:22px"><strong>Alpha:</strong> the core vertical slice is implemented and smoke-tested (<code>scripts/smoke.py</code>). Expect API churn and sharp edges — that is the point of an early release.</div>
+      </div>
+    </section>
+
+    <!-- ============ INSTALL ============ -->
+    <section class="section" id="install">
+      <div class="wrap">
+        <span class="eyebrow">Installation</span>
+        <h2>Run it on your own machine in a few commands</h2>
+        <div class="grid" style="grid-template-columns:1fr 1fr; gap:22px; margin-top:30px">
+          <div class="card">
+            <h3>Install from source</h3>
+<pre><code>git clone https://github.com/honeyamn10-source/jawa-quant-computer.git
+cd jawa-quant-computer
+python -m venv .venv &amp;&amp; source .venv/bin/activate
+pip install -e .
+jawa-quant-computer --version</code></pre>
+          </div>
+          <div class="card">
+            <h3>Start the REPL</h3>
+<pre><code>jawa-quant-computer     # interactive terminal agent
+/help                   # approve, deny, providers, jobs, skills, tasks…
+/quit                   # exit</code></pre>
+            <p style="font-size:0.9rem;margin-top:12px">In demo mode a deterministic mock model answers offline, so the whole system runs with no network and no keys.</p>
+          </div>
+        </div>
+        <div class="note" style="margin-top:22px"><strong>Bring your own model.</strong> Point <code>JQC_DEFAULT_PROVIDER</code> at an OpenAI-compatible endpoint or your local Ollama server for real reasoning. See <code>src/jqc/config.py</code> for every configuration option.</div>
+      </div>
+    </section>
+
+    <!-- ============ QUICK START ============ -->
+    <section class="section section-soft" id="quickstart">
+      <div class="wrap">
+        <span class="eyebrow">Quick start</span>
+        <h2>Go further, faster</h2>
+        <div class="grid" style="grid-template-columns:1fr 1fr; gap:22px; margin-top:30px">
+          <div class="card">
+            <h3>Scheduling</h3>
+<pre><code>&gt; schedule every day at 09:00 — fetch weather
+> schedule once in 10 minutes — remind me to stand
+> /jobs        # persisted jobs + next run
+> /approve &lt;id&gt;  # allow the scheduled action</code></pre>
+          </div>
+          <div class="card">
+            <h3>Providers &amp; smoke tests</h3>
+<pre><code>/providers              # list enabled model providers
+python scripts/smoke.py  # run the offline acceptance flow
+uvicorn jqc.api.server:app \
+  --host 127.0.0.1 --port 8337   # loopback web UI</code></pre>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ DOCS ============ -->
+    <section class="section" id="docs">
+      <div class="wrap">
+        <span class="eyebrow">Documentation</span>
+        <h2>Ultra-thin, faithful docs</h2>
+        <div class="ftable" style="margin-top:24px">
+          <table class="ftable">
+            <thead><tr><th>Document</th><th>Contents</th></tr></thead>
+            <tbody>
+              <tr><td><code>README.md</code></td><td>Overview, highlights, install, permissions and status.</td></tr>
+              <tr><td><code>ARCHITECTURE.md</code></td><td>Module map, orchestrator flow, storage and provider design.</td></tr>
+              <tr><td><code>docs/</code></td><td>Configuration reference, skill guide and design notes.</td></tr>
+              <tr><td><code>ROADMAP.md</code></td><td>Planned direction beyond the alpha.</td></tr>
+              <tr><td><code>scripts/smoke.py</code></td><td>Runnable end-to-end acceptance flow on a temp data dir.</td></tr>
+              <tr><td><code>demo.gif</code></td><td>Screen capture of the agent in action.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="btn-row">
+          <a class="btn btn-ghost" href="https://github.com/honeyamn10-source/jawa-quant-computer/blob/main/docs" target="_blank" rel="noopener">Access docs/</a>
+          <a class="btn btn-ghost" href="https://github.com/honeyamn10-source/jawa-quant-computer/tree/main/tests" target="_blank" rel="noopener">Test suite (55 tests)</a>
+          <a class="btn btn-ghost" href="https://github.com/honeyamn10-source/jawa-quant-computer/security/advisories" target="_blank" rel="noopener">Security advisories</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap">
+      <div class="footer-grid">
+        <div>
+          <h4>Jawa Quant Computer</h4>
+          <p class="bio">A local autonomous AI computer: browser, filesystem, shell, git, documents, memory, search, research and scheduling skills — permission-gated, loopback-only. MIT licensed.</p>
+        </div>
+        <div>
+          <h4>Project</h4>
+          <ul>
+            <li><a href="https://github.com/honeyamn10-source/jawa-quant-computer" target="_blank" rel="noopener">GitHub repository</a></li>
+            <li><a href="https://github.com/honeyamn10-source/jawa-quant-computer/issues" target="_blank" rel="noopener">Issue tracker</a></li>
+            <li><a href="https://github.com/honeyamn10-source/jawa-quant-computer/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener">Contributing</a></li>
+            <li><a href="https://github.com/honeyamn10-source/jawa-quant-computer/blob/main/SECURITY.md" target="_blank" rel="noopener">Security policy</a></li>
+            <li><a href="https://github.com/honeyamn10-source/jawa-quant-computer/blob/main/LICENSE" target="_blank" rel="noopener">License (MIT)</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Ecosystem</h4>
+          <ul>
+            <li><a href="https://github.com/honeyamn10-source" target="_blank" rel="noopener">GitHub profile</a></li>
+            <li><a href="https://honeyamn10-source.github.io/" target="_blank" rel="noopener">Project directory</a></li>
+            <li><a href="https://honeyamn10-source.github.io/envguard/" target="_blank" rel="noopener">envguard</a></li>
+            <li><a href="https://honeyamn10-source.github.io/truagent/" target="_blank" rel="noopener">TruAgent</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Releases</h4>
+          <ul>
+            <li><a href="https://github.com/honeyamn10-source/jawa-quant-computer/blob/main/CHANGELOG.md" target="_blank" rel="noopener">CHANGELOG</a></li>
+            <li><a href="https://github.com/honeyamn10-source/jawa-quant-computer/blob/main/ROADMAP.md" target="_blank" rel="noopener">ROADMAP</a></li>
+            <li><a href="https://github.com/honeyamn10-source/jawa-quant-computer/releases" target="_blank" rel="noopener">Releases</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-base">
+        <span>Built by <a href="https://github.com/honeyamn10-source" target="_blank" rel="noopener">Bittu Sharma</a> · honeyamn10-source</span>
+        <span>© 2026 Bittu Sharma · MIT License</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/site.js"></script>
+</body>
+</html>
