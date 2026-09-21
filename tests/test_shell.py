@@ -47,7 +47,7 @@ async def test_shell_timeout(deps):
                        workspace_dir=deps["settings"].workspace_dir,
                        permissions=deps["permissions"], approvals=deps["approvals"],
                        secrets=deps["secrets"])
-    cmd = "sleep 10" if sys.platform != "win32" else "timeout /t 10"
+    cmd = f'"{sys.executable}" -c "import time; time.sleep(10)"'
     with pytest.raises(JqcError):
         await skill.run("run", {"command": cmd, "timeout_seconds": 1}, ctx)
 
@@ -61,7 +61,8 @@ async def test_shell_uses_workspace_cwd(deps, ws):
                        workspace_dir=ws,
                        permissions=deps["permissions"], approvals=deps["approvals"],
                        secrets=deps["secrets"])
-    res = await skill.run("run", {"command": "pwd"}, ctx)
+    cmd = f'"{sys.executable}" -c "import os; print(os.path.realpath(os.getcwd()))"'
+    res = await skill.run("run", {"command": cmd}, ctx)
     from pathlib import Path
 
-    assert Path(res["stdout"].strip()) == ws
+    assert Path(res["stdout"].strip()).resolve() == ws.resolve()

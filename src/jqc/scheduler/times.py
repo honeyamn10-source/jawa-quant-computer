@@ -101,11 +101,22 @@ def _human_to_seconds(s: str) -> float:
             raise JqcError(f"Cannot parse interval '{s}' (use e.g. '5 minutes', '1 hour')") from None
 
 
+def _cron_field(trigger: dict, key: str) -> int | str:
+    """Parse a cron field: ``*`` (or missing/empty) means any value."""
+    value = trigger.get(key, "*")
+    if value is None or value == "" or value == "*":
+        return "*"
+    try:
+        return int(value)
+    except (TypeError, ValueError):
+        raise JqcError(f"Invalid cron {key} value: {value!r} (use an integer or '*')") from None
+
+
 def _next_cron(trigger: dict, now: datetime) -> datetime:
     """Minimal cron: minute, hour, day-of-month, month, day-of-week (integers)."""
-    minute = int(trigger.get("minute", "*") or "*") if str(trigger.get("minute", "*")) != "*" else "*"
-    hour = int(trigger.get("hour", "*") or "*") if str(trigger.get("hour", "*")) != "*" else "*"
-    dow = int(trigger.get("day_of_week", "*") or "*") if str(trigger.get("day_of_week", "*")) != "*" else "*"
+    minute = _cron_field(trigger, "minute")
+    hour = _cron_field(trigger, "hour")
+    dow = _cron_field(trigger, "day_of_week")
     resolve_tz(trigger.get("timezone"))
     candidate = now.replace(second=0, microsecond=0) + timedelta(minutes=1)
     for _ in range(60 * 24 * 8):
