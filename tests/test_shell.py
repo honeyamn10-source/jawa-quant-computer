@@ -11,6 +11,9 @@ from jqc.skills.base import SkillContext
 from jqc.skills.shell import ShellSkill
 
 
+PWD_CMD = "cd" if sys.platform == "win32" else "pwd"
+
+
 @pytest.mark.asyncio
 async def test_shell_echo(deps):
     skill = ShellSkill()
@@ -47,7 +50,7 @@ async def test_shell_timeout(deps):
                        workspace_dir=deps["settings"].workspace_dir,
                        permissions=deps["permissions"], approvals=deps["approvals"],
                        secrets=deps["secrets"])
-    cmd = "sleep 10" if sys.platform != "win32" else "timeout /t 10"
+    cmd = "sleep 10" if sys.platform != "win32" else "ping -n 10 127.0.0.1 > nul"
     with pytest.raises(JqcError):
         await skill.run("run", {"command": cmd, "timeout_seconds": 1}, ctx)
 
@@ -61,7 +64,7 @@ async def test_shell_uses_workspace_cwd(deps, ws):
                        workspace_dir=ws,
                        permissions=deps["permissions"], approvals=deps["approvals"],
                        secrets=deps["secrets"])
-    res = await skill.run("run", {"command": "pwd"}, ctx)
+    res = await skill.run("run", {"command": PWD_CMD}, ctx)
     from pathlib import Path
 
     assert Path(res["stdout"].strip()) == ws
