@@ -9,6 +9,20 @@ python -m venv .venv && source .venv/bin/activate   # Windows: .venv\Scripts\act
 pip install -e ".[dev]"
 ```
 
+## Windows setup (PowerShell)
+
+Use Python 3.11 or later:
+
+```powershell
+py -m venv .venv
+.\.venv\Scripts\python.exe -m pip install -e ".[dev]"
+$env:JQC_BROWSER_DRIVER = "mock"
+.\.venv\Scripts\python.exe -m pytest
+.\.venv\Scripts\python.exe -m ruff check src tests
+```
+
+These commands call the virtual environment directly, so no activation-policy change is required. For the real browser smoke test, install Chromium with `.\.venv\Scripts\python.exe -m playwright install chromium`, set `$env:JQC_BROWSER_DRIVER = "playwright"`, and run `.\.venv\Scripts\python.exe scripts/smoke.py`.
+
 ## Verification gate
 
 Anything you change must keep the project green:

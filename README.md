@@ -1,3 +1,5 @@
+[![Coverage report](https://img.shields.io/github/actions/workflow/status/honeyamn10-source/jawa-quant-computer/coverage.yml?branch=main&label=coverage)](https://github.com/honeyamn10-source/jawa-quant-computer/actions/workflows/coverage.yml)
+
 ![Jawa Quant Computer](docs/assets/cover.svg)
 
 # Jawa Quant Computer
@@ -112,3 +114,6 @@ pytest
 ## License
 
 MIT — see [LICENSE](LICENSE).
+## Coverage report
+
+The coverage badge shows whether the coverage workflow passes. Open its latest successful run and download `coverage-report` for measured line coverage and uncovered lines. The badge is a workflow status, not a claimed percentage.

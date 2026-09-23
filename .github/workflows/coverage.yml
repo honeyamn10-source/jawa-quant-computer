@@ -1,0 +1,34 @@
+name: Coverage
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  coverage:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      JQC_BROWSER_DRIVER: mock
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - name: Install test dependencies
+        run: python -m pip install -e ".[dev]" pytest pytest-cov
+      - name: Measure test coverage
+        run: python -m pytest tests --cov=jqc --cov-report=term-missing --cov-report=xml:coverage.xml --cov-report=html:htmlcov
+      - name: Upload measured coverage
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report
+          path: |
+            coverage.xml
+            htmlcov/
+          if-no-files-found: error
