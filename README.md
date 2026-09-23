@@ -4,6 +4,20 @@
 
 # Jawa Quant Computer
 
+<!-- repo-badges:start -->
+<div align="center">
+
+[![Stars](https://img.shields.io/github/stars/honeyamn10-source/jawa-quant-computer?style=flat-square&logo=github&label=Stars)](https://github.com/honeyamn10-source/jawa-quant-computer/stargazers)
+[![Forks](https://img.shields.io/github/forks/honeyamn10-source/jawa-quant-computer?style=flat-square&logo=github&label=Forks)](https://github.com/honeyamn10-source/jawa-quant-computer/forks)
+[![Issues](https://img.shields.io/github/issues/honeyamn10-source/jawa-quant-computer?style=flat-square&logo=github&label=Issues)](https://github.com/honeyamn10-source/jawa-quant-computer/issues)
+[![Last Commit](https://img.shields.io/github/last-commit/honeyamn10-source/jawa-quant-computer?style=flat-square&logo=github&label=Last%20Commit)](https://github.com/honeyamn10-source/jawa-quant-computer/commits/main)
+
+[Repository](https://github.com/honeyamn10-source/jawa-quant-computer) · [Issues](https://github.com/honeyamn10-source/jawa-quant-computer/issues) · [Pull Requests](https://github.com/honeyamn10-source/jawa-quant-computer/pulls) · [Actions](https://github.com/honeyamn10-source/jawa-quant-computer/actions)
+
+</div>
+<!-- repo-badges:end -->
+
+
 An alpha Python agent workspace with a terminal, a local web interface, tools, scheduling and an activity record.
 
 [Project website](https://honeyamn10-source.github.io/jawa-quant-computer/) · [Build results](https://github.com/honeyamn10-source/jawa-quant-computer/actions)
