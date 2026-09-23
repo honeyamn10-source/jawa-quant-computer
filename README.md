@@ -1,31 +1,18 @@
-<p align="center">
-  <img src="docs/assets/logo.svg" alt="jawa-quant-computer logo" width="100%" />
-</p>
-
-
-<p align="center">
-</p>
-
+![Jawa Quant Computer](docs/assets/cover.svg)
 
 # Jawa Quant Computer
 
-An autonomous AI computer: a local agent operating layer that browses the web,
-manages files, runs commands, uses your documents and memory, schedules jobs,
-and can call your favourite LLM — all from a terminal REPL or a loopback web UI.
+An alpha Python agent workspace with a terminal, a local web interface, tools, scheduling and an activity record.
 
-> **Alpha.** The core vertical slice is implemented and smoke-tested. Everything
-> runs locally on your machine; nothing leaves it unless you configure a model
-> provider and approve the specific action.
+[Project website](https://honeyamn10-source.github.io/jawa-quant-computer/) · [Build results](https://github.com/honeyamn10-source/jawa-quant-computer/actions)
 
-<div align="center">
+## What it does
 
-| CI · lint | Tests | Python | License |
-| --- | --- | --- | --- |
-| [![CI](https://github.com/honeyamn10-source/jawa-quant-computer/actions/workflows/ci.yml/badge.svg)](https://github.com/honeyamn10-source/jawa-quant-computer/actions/workflows/ci.yml) | ![tests: 55 passing](https://img.shields.io/badge/tests-55%20passing-2ea44f) | ![python 3.11–3.13](https://img.shields.io/badge/python-3.11%20%7C%203.12%20%7C%203.13-3776ab) | [![MIT](https://img.shields.io/badge/license-MIT-4db5bd)](LICENSE) |
+- **Plan and inspect.** Follow tasks through the orchestrator, tool steps and event stream.
+- **Use local tools.** Browser, filesystem and shell tools use the configured permission policy.
+- **Choose a provider.** Begin in deterministic demo mode, then configure an OpenAI-compatible or Ollama endpoint.
 
-**Demo-first · loopback-only · permission-gated every action**
-
-</div>
+> Alpha software. Demo mode is deterministic; a mock result is not proof of a real browser or model operation. Review permissions before enabling tools on personal data.
 
 ## Highlights
 
