@@ -17,6 +17,18 @@
 </div>
 <!-- repo-badges:end -->
 
+<!-- professional-meta:start -->
+<div align="center">
+
+[![ci](https://github.com/honeyamn10-source/jawa-quant-computer/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/honeyamn10-source/jawa-quant-computer/actions/workflows/ci.yml) [![coverage](https://github.com/honeyamn10-source/jawa-quant-computer/actions/workflows/coverage.yml/badge.svg?branch=main)](https://github.com/honeyamn10-source/jawa-quant-computer/actions/workflows/coverage.yml) [![release](https://github.com/honeyamn10-source/jawa-quant-computer/actions/workflows/release.yml/badge.svg?branch=main)](https://github.com/honeyamn10-source/jawa-quant-computer/actions/workflows/release.yml)
+
+![Python](https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white) ![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=flat-square&logo=fastapi&logoColor=white) ![SQLite](https://img.shields.io/badge/SQLite-003B57?style=flat-square&logo=sqlite&logoColor=white) ![Playwright](https://img.shields.io/badge/Playwright-2EAD33?style=flat-square&logo=playwright&logoColor=white)
+
+[Architecture](ARCHITECTURE.md) · [Roadmap](ROADMAP.md) · [Contributing](CONTRIBUTING.md) · [Security](SECURITY.md) · [Demo](demo.gif)
+
+</div>
+<!-- professional-meta:end -->
+
 
 An alpha Python agent workspace with a terminal, a local web interface, tools, scheduling and an activity record.
 
