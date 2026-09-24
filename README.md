@@ -34,6 +34,27 @@ An alpha Python agent workspace with a terminal, a local web interface, tools, s
 
 [Project website](https://honeyamn10-source.github.io/jawa-quant-computer/) · [Build results](https://github.com/honeyamn10-source/jawa-quant-computer/actions)
 
+<!-- architecture-showcase:start -->
+## Demo
+
+![Jawa Quant Computer demo](demo.gif)
+
+## Architecture
+
+```mermaid
+flowchart LR
+    A[Terminal / Web UI] --> B[FastAPI + agent orchestrator]
+    B --> C[Planner / step executor]
+    C --> D[Browser, filesystem, shell and other tools]
+    C --> E[Model providers]
+    B --> F[Scheduler]
+    B --> G[(SQLite task, event and activity store)]
+    E --> H[Mock / OpenAI-compatible / Ollama]
+```
+
+The mock path is deterministic and offline; browser and hosted-model behavior depends on the configured drivers and providers.
+<!-- architecture-showcase:end -->
+
 ## What it does
 
 - **Plan and inspect.** Follow tasks through the orchestrator, tool steps and event stream.
